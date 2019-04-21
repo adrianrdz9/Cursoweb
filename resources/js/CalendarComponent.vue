@@ -7,7 +7,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="title"> {{ event.title }} </h3>
-              <a class="time" style="color: #3490dc;" href="#" @click="goTo(event.date)"> {{ event.date }} </a>
+              <a class="time" style="color: #3490dc;" href="#" @click="goTo(event.date)"> {{ event.date.split("/").reverse().join("/") }} </a>
             </div>
 
             <div class="card-body">

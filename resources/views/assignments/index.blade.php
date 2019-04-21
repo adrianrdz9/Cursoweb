@@ -17,8 +17,8 @@
                 <a class="nav-link" id="proyectosT" data-toggle="tab" href="#proyectos" role="tab" aria-controls="proyectos" aria-selected="false">Proyectos</a>
             </li>
         </ul>
-        <div class="tab-content" id="assignmentTabs">
-            <div class="tab-pane fade show active p-4" id="tareas" role="tabpanel" aria-labelledby="tareasT">
+        <div class="tab-content p-4" id="assignmentTabs">
+            <div class="tab-pane fade show active" id="tareas" role="tabpanel" aria-labelledby="tareasT">
                 <div class="row">
                     @isset($assignments['Tarea'])
                         @forelse ($assignments['Tarea'] as $assignment)

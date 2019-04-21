@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Assignment;
+use \Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -30,7 +31,11 @@ class HomeController extends Controller
 
     public function calendar(){
         $assignments = Assignment::all();
+        //l jS \\of F Y h:i:s A
+        Carbon::setLocale("es");
+        setlocale(LC_ALL, 'es_ES');
+        $today = Carbon::now()->formatLocalized("%A %e de %B, %Y");
 
-        return view('calendar', ['assignments' => $assignments]);
+        return view('calendar', ['assignments' => $assignments, 'today' => $today]);
     }
 }

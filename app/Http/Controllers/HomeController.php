@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Assignment;
+use App\Announcement;
 use \Carbon\Carbon;
 
 class HomeController extends Controller
@@ -26,7 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $announcements = Announcement::where([
+            'expiration', '<=', new Carbon()
+        ]);
+
+        return view('home', ['announcements' => $announcements]);
     }
 
     public function calendar(){

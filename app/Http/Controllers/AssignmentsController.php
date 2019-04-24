@@ -16,7 +16,7 @@ class AssignmentsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin')->except(['index']);
+
     }
 
     /**
@@ -31,10 +31,14 @@ class AssignmentsController extends Controller
     }
 
     public function create(){
+        $this->authorize('create', Assignment::class);
+
         return view('assignments.create', ['assignment' => new Assignment() ]);
     }
 
     public function store(Request $request){
+
+        $this->authorize('create', Assignment::class);
 
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string', 'max:190'],
@@ -55,6 +59,8 @@ class AssignmentsController extends Controller
     }
 
     public function show(Assignment $assignment){
+        $this->authorize('view', $assignment);
+
         return view('assignments.show', ['assignment' => $assignment]);
     }
 }

@@ -48,4 +48,9 @@ class Assignment extends Model
             throw new Error("No se puede obtener una entrega si no se ha iniciado sesión");
         }
     }
+    
+    public function deliveries()
+    {
+        return $this->hasMany('App\Delivery', 'assignment_id', 'id');
+    }
 }

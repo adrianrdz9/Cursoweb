@@ -22,8 +22,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('delivery', 'DeliveriesController');
 
     Route::resource('comment', 'CommentsController');
+    
+    Route::resource('announcements', 'AnnouncementsController');
 
     Route::get('/calendario', 'HomeController@calendar')->name('calendar');
     
     Route::resource('resources', 'ResourcesController');
+
+    Route::resource('users', 'UsersController');
+
+    Route::resource('roles', 'RolesController');
+
+    Route::resource('permissions', 'PermissionsController');
+
+    Route::resource('posts', 'PostsController');
 });

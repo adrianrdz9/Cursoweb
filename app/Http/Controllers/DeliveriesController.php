@@ -26,9 +26,16 @@ class DeliveriesController extends Controller
      */
     public function index()
     {
-        $deliveries = Delivery::where([
-            ['user_id', auth()->user()->id]
-        ])->with('assignment')->get()->sortByDesc('updated_at');
+        if(auth()->user()->hasRole('admin')){
+            $deliveries = Assignment::with('deliveries.user')->get();
+        }else if(auth()->user()->can('view delieries')){
+            $deliveries = Delivery::where([
+                ['user_id', auth()->user()->id]
+            ])->with('assignment')->get()->sortByDesc('updated_at');
+        }else{
+            $deliveries = [];
+        }
+
         return view('deliveries.index', ['deliveries' => $deliveries]);
     }
 
@@ -38,6 +45,8 @@ class DeliveriesController extends Controller
     }
 
     public function store(Request $request){
+        $this->authorize('create', Delivery::class);
+
         $request->validate([
             'assignment_id' => ['required', 'exists:assignments,id'],
             'link' => ['required'],
@@ -54,13 +63,16 @@ class DeliveriesController extends Controller
         return redirect()->route('delivery.show', ['assignment_id' => $delivery->assignment_id]);
     }
 
-    public function update($id, Request $request){
+    public function update(Delivery $delivery, Request $request){
+
+        $this->authorize('update', $delivery);
+
         $request->validate([
             'link' => ['required'],
             'comment' => ['nullable']
         ]);
 
-        Delivery::find($id)->update([
+        $delivery->update([
             'link' => $request['link'],
             'comment' => $request['comment']
         ]);

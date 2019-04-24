@@ -65758,7 +65758,7 @@ var render = function() {
                                         _c("div", {
                                           staticClass: "col-12",
                                           domProps: {
-                                            innerHTML: _vm._s(comment.comment)
+                                            innerHTML: _vm._s(response.comment)
                                           }
                                         })
                                       ])
@@ -78876,8 +78876,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/adrianrodriguez/Desktop/Cursoweb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/adrianrodriguez/Desktop/Cursoweb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/ardz9/Desktop/cursoWeb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/ardz9/Desktop/cursoWeb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

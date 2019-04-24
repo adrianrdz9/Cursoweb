@@ -27,27 +27,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-
-        Blade::if('admin', function () {
-
-            if(auth()->check()){
-                return auth()->user()->account_number == '317114270';
-            }
-
-            return false;
-        });
-
-        Blade::if('student', function () {
-            return true;
-            if(auth()->check()){
-                if(auth()->user()->account_number == '317114270'){
-                    return false;
-                }
-
-                return auth()->user()->accepted;
-            }
-
-            return false;
-        });
     }
 }

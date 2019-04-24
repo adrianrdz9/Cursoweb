@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title', 'Curso web')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -35,23 +35,91 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @student
+
+                        @can('create assignments')
+                            <li class="nav-item dropdown">
+                                <a href="#" id="assignmentsDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Trabajos <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="assignmentsDropdown">
+                                    <a href="{{ route('assignment.index') }}" class="dropdown-item">Todos</a>
+                                    <a href="{{ route('assignment.create') }}" class="dropdown-item">Crear</a>
+                                </div>
+                            </li>
+                        @elsecan('view assignments')
                             <li class="nav-item">
                                 <a href="{{ route('assignment.index') }}" class="nav-link">Trabajos</a>
                             </li>
-                            
+                        @endcan
+
+                        @can('create useful resources')
+                            <li class="nav-item dropdown">
+                                <a href="#" id="usefulResourcesDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Recursos utiles <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="usefulResourcesDropdown">
+                                    <a href="{{ route('resources.index') }}" class="dropdown-item">Todos</a>
+                                    <a href="{{ route('resources.create') }}" class="dropdown-item">Crear</a>
+                                </div>
+                            </li>
+                        @elsecan('view useful resources')    
                             <li class="nav-item">
                                 <a href="{{ route('resources.index') }}" class="nav-link">Recursos útiles</a>
                             </li>
-                            
+                        @endcan
+  
+                        @can('view calendar')
                             <li class="nav-item">
                                 <a href="{{ route('calendar') }}" class="nav-link">Calendario</a>
                             </li>
-                            
-                            <li class="nav-item">
-                                <a href="{{ route('delivery.index') }}" class="nav-link">Mis entregas</a>
+                        @endcan
+
+                        @can('view deliveries')
+                            @role('admin')
+                                <li class="nav-item">
+                                    <a href="{{ route('delivery.index') }}" class="nav-link">Entregas</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a href="{{ route('delivery.index') }}" class="nav-link">Mis entregas</a>
+                                </li>
+                            @endrole
+                        @endcan
+
+                        @role('admin')
+                            <li class="nav-item dropdown">
+                                <a href="#" id="usersDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Usuarios <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="usersDropdown">
+                                    <a href="{{ route('roles.index') }}" class="dropdown-item">Roles</a>
+                                    <a href="{{ route('permissions.index') }}" class="dropdown-item">Permisos</a>
+                                    <a href="{{ route('users.index') }}" class="dropdown-item">Usuarios</a>
+                                </div>
                             </li>
-                        @endstudent
+                        @endrole
+                        
+                        @can('create posts')
+                            <li class="nav-item dropdown">
+                                <a href="#" id="blogDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Blog <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="blogDropdown">
+                                    <a href="{{ route('posts.index') }}" class="dropdown-item">Todas las publicaciones</a>
+                                    <a href="{{ route('posts.create') }}" class="dropdown-item">Publicar</a>
+                                </div>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a href="{{ route('posts.index') }}">Blog</a>
+                            </li>
+                        @endcan
+
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -116,6 +184,14 @@
                     </ul>
                 </div>
             @endif
+
+            @if (session('notice'))
+            <div class="alert alert-info">
+                <ul>
+                   {{ session('notice') }}
+                </ul>
+            </div>
+        @endif
 
 
             @yield('content')

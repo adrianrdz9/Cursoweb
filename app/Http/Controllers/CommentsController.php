@@ -26,6 +26,8 @@ class CommentsController extends Controller
     }
 
     public function store(Request $request){
+        $this->authorize('create', Comment::class);
+
         $request->validate([
             'comment' => ['required'],
             'comment_id' => ['nullable', 'exists:comments,id'],

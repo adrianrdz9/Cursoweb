@@ -31,9 +31,7 @@
                 <h3>Comentarios</h3>
             </div>
 
-
             <comments-component :assignment_id="{{ $assignment->id }}"></comments-conmponent>
-
 
         </div>
     </div>

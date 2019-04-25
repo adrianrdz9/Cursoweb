@@ -101,6 +101,23 @@
                                 </div>
                             </li>
                         @endrole
+
+                        @can('create exams')
+                            <li class="nav-item dropdown">
+                                <a href="#" id="blogDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Examenes <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="blogDropdown">
+                                    <a href="{{ route('exams.index') }}" class="dropdown-item">Ver todos</a>
+                                    <a href="{{ route('exams.create') }}" class="dropdown-item">Crear</a>
+                                </div>
+                            </li>
+                        @elsecan('view exams')
+                            <li class="nav-item">
+                                <a href="{{ route('exams.index') }}">Examenes</a>
+                            </li>
+                        @endcan
                         
                         @can('create posts')
                             <li class="nav-item dropdown">

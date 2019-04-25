@@ -26,9 +26,9 @@ class DeliveriesController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->hasRole('admin')){
+        if(auth()->user()->can('view all deliveries')){
             $deliveries = Assignment::with('deliveries.user')->get();
-        }else if(auth()->user()->can('view delieries')){
+        }else if(auth()->user()->can('view deliveries')){
             $deliveries = Delivery::where([
                 ['user_id', auth()->user()->id]
             ])->with('assignment')->get()->sortByDesc('updated_at');
@@ -40,6 +40,13 @@ class DeliveriesController extends Controller
     }
 
     public function show($id){
+
+        if(auth()->user()->can('review deliveries')){
+            $delivery = Delivery::find($id);
+
+            return view('deliveries.mark', compact('delivery'));
+        }
+
         $assignment = Assignment::find($id);
         return view('deliveries.show', ['assignment' => $assignment]);
     }
@@ -67,6 +74,22 @@ class DeliveriesController extends Controller
 
         $this->authorize('update', $delivery);
 
+        if( $request->has('mark') && auth()->user()->can('mark deliveries') ){
+            $request->validate([
+                'mark' => ['required', 'min: 0', 'max:10', 'integer']
+            ]);
+
+            $delivery->timestamps = false;
+            $delivery->mark = $request['mark'];
+            $delivery->save();
+
+            return redirect()->route('delivery.show', ['delivery_id' => $delivery->id]);
+        }
+
+        if( isset($delivery->mark) ){
+            return redirect()->route('delivery.show', ['assignment_id' => $delivery->assignment_id])->with('notice', 'No puedes volver a entregar esta tarea, ya fue calificada');
+        }
+
         $request->validate([
             'link' => ['required'],
             'comment' => ['nullable']
@@ -77,6 +100,6 @@ class DeliveriesController extends Controller
             'comment' => $request['comment']
         ]);
 
-        return redirect()->route('delivery.show', ['assignment_id' => Delivery::find($id)->assignment_id]);
+        return redirect()->route('delivery.show', ['assignment_id' => $delivery->assignment_id]);
     }
 }

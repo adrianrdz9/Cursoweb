@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Assignment;
 use App\Announcement;
-use \Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -27,15 +26,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::where([
-            'expiration', '<=', new Carbon()
-        ]);
+        $now = date('Y-m-d');
+        $announcements = Announcement::where(
+            'expiration', '>=', $now
+        )->get();
 
         return view('home', ['announcements' => $announcements]);
     }
 
     public function calendar(){
-        $assignments = Assignment::all();
+        $assignments = [];
+        foreach(Assignment::all() as $a){
+            if(!$a->delivered()){
+                array_push($assignments, $a);
+            }
+        }
+        $assignments = json_encode($assignments);
         //l jS \\of F Y h:i:s A
         Carbon::setLocale("es");
         setlocale(LC_ALL, 'es_ES');

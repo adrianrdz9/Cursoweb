@@ -36,4 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('permissions', 'PermissionsController');
 
     Route::resource('posts', 'PostsController');
+
+    Route::resource('exams', 'ExamsController');
 });

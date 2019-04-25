@@ -14,6 +14,8 @@ use Spatie\Permission\Models\Permission;
 //Enables us to output flash messaging
 use Session;
 
+use Illuminate\Validation\Rule;
+
 
 class UsersController extends Controller
 {
@@ -114,14 +116,14 @@ class UsersController extends Controller
     {
         $request->validate([
             'name' => ['required','max:100'],
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
             'account_number' => ['nullable', 'max:9'],
             'password' => ['required', 'min:6', 'confirmed']
         ]);
 
         $user->update(array_merge(
             $request->only(['name', 'account_number', 'email']),
-            Hash::make($request['password'])
+            ['password' => Hash::make($request['password'])]
         ));
 
         if (isset($request['roles'])) { 

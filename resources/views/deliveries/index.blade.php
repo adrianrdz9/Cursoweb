@@ -27,7 +27,7 @@
                 </div>
                 <div class="row">
                     @forelse ($assignment->deliveries as $delivery)
-                        <div class="col-12">
+                        <div class="col-12 mb-4">
                             <div class="card">
                                 <div class="card-header bg-{{ $delivery->mark == null ? 'danger' : 'success' }}">
                                     <h3>
@@ -39,9 +39,13 @@
                                     </strong>
                                 </div>
 
-                                <div class="card-body">
+                                <div class="card-body" style="max-height: 200px; overflow-y: hidden;">
                                     <a href="{{ $delivery->link }}">{{ $delivery->link }}</a>
                                     {!! $delivery->comment !!}
+                                </div>
+
+                                <div class="card-footer">
+                                    <a href="{{ route('delivery.show', ['id' => $delivery->id]) }}" class="btn btn-outline-info">Ver</a>
                                 </div>
                             </div>
                         </div>
@@ -66,6 +70,11 @@
                     <li>
                         {{ $delivery->assignment->type }}:
                         <a target="_blank" href="{{ route('assignment.show', ['id'=>$delivery->assignment->id]) }}"> {{ $delivery->assignment->title }} <i class="fas fa-external-link-alt ml-1"></i></a>
+                        @isset($delivery->mark)
+                        <br>
+                            <strong>Calificación: </strong>
+                            {{ $delivery->mark }}
+                        @endisset
                         <a href="{{ route('delivery.show', ['assignment_id' => $delivery->assignment->id]) }}" class="float-right">Ver ultima entrega ({{$delivery->updated_at->isoFormat('MMMM D YYYY, h:mm a') }}) <i class="fas fa-external-link-alt ml-1"></i></a>
                         <div style="max-height: 200px; overflow-x: scroll;">
                             <p>

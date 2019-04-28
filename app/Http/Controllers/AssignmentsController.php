@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Validator;
+use Notification;
 use App\Assignment;
+use App\Module;
+use App\User;
+use App\Notifications\AssignmentCreated;
+
 
 use Illuminate\Http\Request;
 
@@ -26,8 +31,8 @@ class AssignmentsController extends Controller
      */
     public function index()
     {
-        $assignments = Assignment::all()->sortBy('deadline')->groupBy('type');
-        return view('assignments.index', ['assignments' => $assignments]);
+        $modules = Module::with('assignments')->get();
+        return view('assignments.index', ['modules' => $modules]);
     }
 
     public function create(){
@@ -45,14 +50,23 @@ class AssignmentsController extends Controller
             'deadline' => ['required', 'date_format:Y-m-d H:i:s', 'after:today'],
             'description' => ['nullable', 'string'],
             'example' => ['nullable', 'string'],
-            'type' => ['required', 'string']
+            'type' => ['required', 'string'],
+            'module_id' => ['required', 'exists:modules,id']
         ]);
+
+        if( 
+            !auth()->user()->teachModule($request['module_id'])
+         ){
+            return redirect()->route('assignment.create')->withInput($request->all())->with('notice', 'No puedes crear tareas para modulos en los que no eres profesor');
+         }
 
         if($validator->fails()){
             return redirect()->route('assignment.create')->withInput($request->all())->withErrors($validator);
         }
 
         $assignment = Assignment::create($request->all());
+
+        Notification::send(User::all(), new AssignmentCreated($assignment));
 
         return redirect()->route('assignment.show', [$assignment]);
     

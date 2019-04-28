@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Spatie\Permission\Traits\HasRoles;
 
+use App\Module;
+
 class User extends Authenticatable
 {
     use HasRoles;
@@ -45,4 +47,19 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Delivery', 'user_id', 'id');
     }
+
+    public function modules()
+    {
+        return $this->hasManyThrough('App\Module', 'App\ModuleTeacher', 'teacher_id', 'id');
+    }
+
+    public function teachModule($mid){
+        foreach($this->modules as $m){
+            if($m->id == $mid) return true;
+        }
+
+        return false;
+    }
+
+
 }

@@ -16,10 +16,20 @@
                         <label for="title">Título</label>
                         <input id="title" type="text" name="title" value="{{ old('title', $assignment->title ) }}" class="form-control" placeholder="Título" required>
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
                         <label for="deadline">Fecha límite</label>
                         <datetime id="deadline" format="y-LL-dd HH:mm:ss" type="datetime" name="deadline" value="{{ old('deadline', $assignment->deadline ) }}" placeholder="Fecha límite" aria-required="true"></datetime>
                     </div>
+
+                    <div class="col-6">
+                        <label for="module">Módulo</label>
+                        <select name="module_id" id="module" class="form-control">
+                            @foreach (auth()->user()->modules as $module)
+                                <option value="{{ $module->id }}">{{ $module->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="col-12">
                         <label for="description">Descripción (opcional)</label>
                         <textarea name="description" id="description" cols="30" rows="10" placeholder="Descripción">

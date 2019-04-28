@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+    <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -88,6 +89,23 @@
                             @endrole
                         @endcan
 
+                        @can('create modules')
+                            <li class="nav-item dropdown">
+                                <a href="#" id="usersDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Modulos <span class="caret"></span>
+                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="usersDropdown">
+                                    <a href="{{ route('modules.index') }}" class="dropdown-item">Todos</a>
+                                    <a href="{{ route('modules.create') }}" class="dropdown-item">Crear</a>
+                                </div>
+                            </li>
+                        @elsecan('view modules')
+                                <li class="nav-item">
+                                    <a href="{{ route('modules.index') }}" class="nav-link">Modulos</a>
+                                </li>
+                        @endcan
+
                         @role('admin')
                             <li class="nav-item dropdown">
                                 <a href="#" id="usersDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -102,7 +120,7 @@
                             </li>
                         @endrole
 
-                        @can('create exams')
+                        {{-- @can('create exams')
                             <li class="nav-item dropdown">
                                 <a href="#" id="blogDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Examenes <span class="caret"></span>
@@ -117,7 +135,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('exams.index') }}">Examenes</a>
                             </li>
-                        @endcan
+                        @endcan --}}
                         
                         @can('create posts')
                             <li class="nav-item dropdown">
@@ -142,15 +160,26 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item">
+                        <li class="nav-item dropdown">
                             <a id="notificationsDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fas fa-bell"></i>
-                                <span class="badge badge-pill badge-danger">0</span>
+                                <span class="badge badge-pill badge-danger">
+                                    {{ count(auth()->user()->unreadNotifications) }}
+                                </span>
                                 <span class="caret"></span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">
-                                <!-- TO DO -->
+                            <div class="dropdown-menu dropdown-menu-right" style="max-height: 500px; overflow-y: scroll" aria-labelledby="notificationsDropdown">
+                                <h6 class="dropdown-header">Nuevas</h6>
+                                @foreach (auth()->user()->unreadNotifications as $notification)
+                                    @component('layouts.notificationTile', compact('notification'))
+                                    @endcomponent
+                                @endforeach
+                                <h6 class="dropdown-header">Vistas</h6>
+                                @foreach (auth()->user()->readNotifications as $notification)
+                                    @component('layouts.notificationTile', compact('notification'))
+                                    @endcomponent
+                                @endforeach
                             </div>
                         </li>
 

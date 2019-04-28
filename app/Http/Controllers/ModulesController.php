@@ -4,8 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Module;
+use App\ModuleTeacher;
+use App\User;
+
 class ModulesController extends Controller
 {
+
+    function __construct(){
+        $this->middleware('can:view modules')->only('index');
+        $this->middleware('can:create modules')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,9 @@ class ModulesController extends Controller
      */
     public function index()
     {
-        //
+        $modules = Module::all();
+
+        return view('modules.index', compact('modules'));
     }
 
     /**
@@ -21,9 +33,14 @@ class ModulesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
+        if($request->ajax()){
+            return User::all();
+        }
+
+        return view('modules.create');
     }
 
     /**
@@ -34,7 +51,29 @@ class ModulesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:100'],
+            'description' => ['required'],
+            'hours' => ['required'],
+            'evaluation' => ['required'],
+            'teachers' => ['required']
+        ]);
+
+        $module = Module::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'hours' => $request['hours'],
+            'evaluation' => $request['evaluation']
+        ]);
+
+        foreach ($request['teachers'] as $teacher_id) {
+            ModuleTeacher::create([
+                'teacher_id' => $teacher_id,
+                'module_id' => $module->id
+            ]);
+        }
+
+        return redirect()->route('modules.index')->with('notice', 'Modulo creado');
     }
 
     /**
@@ -45,7 +84,9 @@ class ModulesController extends Controller
      */
     public function show($id)
     {
-        //
+        $module = Module::find($id);
+
+        return view('modules.show', compact('module'));
     }
 
     /**

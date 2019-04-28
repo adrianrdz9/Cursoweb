@@ -7,7 +7,7 @@
     <div class="container">
         @component('assignments._card', ['assignment' => $assignment])
             @slot('footer')
-                @student
+                @role('student')
                     @if($assignment->delivered())
                         <span>
                             Entregado
@@ -23,7 +23,7 @@
                         <a href="{{ route('delivery.show', ['assignment_id' => $assignment->id]) }}" class="btn btn-outline-success">Entregar</a>
 
                     @endif
-                @endstudent
+                @endrole
             @endslot
         @endcomponent
         <div class="card mt-4">

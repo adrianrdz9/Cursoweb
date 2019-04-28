@@ -10,7 +10,7 @@ use \Carbon\Carbon;
 
 class Assignment extends Model
 {
-    protected $fillable = ['deadline', 'title', 'description', 'example', 'type'];
+    protected $fillable = ['deadline', 'title', 'description', 'example', 'type', 'module_id'];
 
     protected $cast = [
         'deadline' => 'datetime'

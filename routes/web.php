@@ -38,4 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('posts', 'PostsController');
 
     Route::resource('exams', 'ExamsController');
+
+    Route::resource('modules', 'ModulesController');
+
+    Route::post('notifications/{id}', 'NotificationsController@show')->name('notification.show');
 });

@@ -41,15 +41,21 @@
     </div>
     <div class="card-footer">
         @empty($footer)
-            <a class="btn btn-info" href="{{ route('assignment.show', [$assignment])}}">Ver</a>
-            <span>
-                @if ($assignment->delivered())
-                    Entregado
-                    {{ $assignment->deliveredAt()->fromNow() }}
-                @else
-                    No entregado
-                @endif
-            </span>
+            @role('student')
+                <a class="btn btn-info" href="{{ route('assignment.show', [$assignment])}}">Ver</a>
+                <span>
+                    @if ($assignment->delivered())
+                        Entregado
+                        {{ $assignment->deliveredAt()->fromNow() }}
+                    @else
+                        No entregado
+                    @endif
+                </span>
+            @else
+                @can('view assignments')
+                    <a class="btn btn-info" href="{{ route('assignment.show', [$assignment])}}">Ver</a>
+                @endcan
+            @endrole
         @else
             {{ $footer }}
         @endempty

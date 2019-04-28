@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta description="Sitio web dedicado a mejorar la experiencia de aprendizaje durante el curso web de prepa 6">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -26,8 +27,10 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" title="Curso web" href="{{ url('/') }}">
+                    <h1 class="h4">
+                        {{ config('app.name', 'Curso web') }}
+                    </h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -78,7 +81,7 @@
                         @endcan
 
                         @can('view deliveries')
-                            @role('admin')
+                            @can('mark deliveries')
                                 <li class="nav-item">
                                     <a href="{{ route('delivery.index') }}" class="nav-link">Entregas</a>
                                 </li>
@@ -86,7 +89,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('delivery.index') }}" class="nav-link">Mis entregas</a>
                                 </li>
-                            @endrole
+                            @endcan
                         @endcan
 
                         @can('create modules')
@@ -106,7 +109,7 @@
                                 </li>
                         @endcan
 
-                        @role('admin')
+                        @can('view all users')
                             <li class="nav-item dropdown">
                                 <a href="#" id="usersDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Usuarios <span class="caret"></span>
@@ -118,7 +121,7 @@
                                     <a href="{{ route('users.index') }}" class="dropdown-item">Usuarios</a>
                                 </div>
                             </li>
-                        @endrole
+                        @endcan
 
                         {{-- @can('create exams')
                             <li class="nav-item dropdown">
@@ -154,7 +157,7 @@
                                     <a href="{{ route('posts.create') }}" class="dropdown-item">Publicar</a>
                                 </div>
                             </li>
-                        @else
+                        @elsecan('view posts')
                             <li class="nav-item">
                                 <a href="{{ route('posts.index') }}">Blog</a>
                             </li>
@@ -193,11 +196,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" title="Login" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" title="Register" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else

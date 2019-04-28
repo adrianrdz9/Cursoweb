@@ -8,6 +8,8 @@ use App\Assignment;
 use App\Announcement;
 use App\Post;
 
+use \Carbon\Carbon;
+
 class HomeController extends Controller
 {
     /**

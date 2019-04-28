@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://cursowebp6.online/sitemap.xml

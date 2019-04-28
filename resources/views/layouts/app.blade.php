@@ -136,6 +136,12 @@
                                 <a href="{{ route('exams.index') }}">Examenes</a>
                             </li>
                         @endcan --}}
+
+                        @can('create announcements')
+                            <li class="nav-item">
+                                <a href="{{ route('announcements.index') }}" class="nav-link">Anuncios</a>
+                            </li>
+                        @endcan
                         
                         @can('create posts')
                             <li class="nav-item dropdown">
@@ -159,29 +165,30 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @auth
+                            <li class="nav-item dropdown">
+                                <a id="notificationsDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-pill badge-danger">
+                                        {{ count(auth()->user()->unreadNotifications) }}
+                                    </span>
+                                    <span class="caret"></span>
+                                </a>
 
-                        <li class="nav-item dropdown">
-                            <a id="notificationsDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fas fa-bell"></i>
-                                <span class="badge badge-pill badge-danger">
-                                    {{ count(auth()->user()->unreadNotifications) }}
-                                </span>
-                                <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" style="max-height: 500px; overflow-y: scroll" aria-labelledby="notificationsDropdown">
-                                <h6 class="dropdown-header">Nuevas</h6>
-                                @foreach (auth()->user()->unreadNotifications as $notification)
-                                    @component('layouts.notificationTile', compact('notification'))
-                                    @endcomponent
-                                @endforeach
-                                <h6 class="dropdown-header">Vistas</h6>
-                                @foreach (auth()->user()->readNotifications as $notification)
-                                    @component('layouts.notificationTile', compact('notification'))
-                                    @endcomponent
-                                @endforeach
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-right" style="max-height: 500px; overflow-y: scroll" aria-labelledby="notificationsDropdown">
+                                    <h6 class="dropdown-header">Nuevas</h6>
+                                    @foreach (auth()->user()->unreadNotifications as $notification)
+                                        @component('layouts.notificationTile', compact('notification'))
+                                        @endcomponent
+                                    @endforeach
+                                    <h6 class="dropdown-header">Vistas</h6>
+                                    @foreach (auth()->user()->readNotifications as $notification)
+                                        @component('layouts.notificationTile', compact('notification'))
+                                        @endcomponent
+                                    @endforeach
+                                </div>
+                            </li>
+                        @endauth
 
                         <!-- Authentication Links -->
                         @guest

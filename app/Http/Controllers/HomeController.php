@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Assignment;
 use App\Announcement;
+use App\Post;
 
 class HomeController extends Controller
 {
@@ -31,7 +32,14 @@ class HomeController extends Controller
             'expiration', '>=', $now
         )->get();
 
-        return view('home', ['announcements' => $announcements]);
+        $assignments = Assignment::orderByDesc('created_at')->limit(4)->get();
+
+        $notifications['unread'] = auth()->user()->unreadNotifications;
+        $notifications['read'] = auth()->user()->readNotifications;
+
+        $posts = Post::orderByDesc('created_at')->limit(4)->get();
+
+        return view('home',compact('assignments', 'notifications', 'announcements', 'posts'));
     }
 
     public function calendar(){

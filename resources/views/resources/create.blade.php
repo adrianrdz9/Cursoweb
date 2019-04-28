@@ -72,7 +72,15 @@
     function wait(){
         try{
             ClassicEditor
-                .create( document.querySelector( '#description' ) )
+                .create( 
+                    document.querySelector( '#description' ),
+                    {
+                        cloudServices: {
+                            uploadUrl: 'https://39214.cke-cs.com/easyimage/upload/',
+                            tokenUrl: 'https://39214.cke-cs.com/token/dev/QAvzqcOY0o81o93hew7gtiMK30DKAnE3ravMKl9kQSTyyDaClogBz570AyPF'
+                        }
+                    }
+                )
         }catch(e){
             setTimeout(wait, 20);
         }

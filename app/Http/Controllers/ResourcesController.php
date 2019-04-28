@@ -15,7 +15,8 @@ class ResourcesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin')->except(['index', 'show']);
+        $this->middleware('can:view resources')->only(['index', 'show']);
+        $this->middleware('can:create resources')->except(['index', 'show']);
     }
 
     public function index()

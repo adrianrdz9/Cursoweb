@@ -1,6 +1,6 @@
 <form action="{{ route('notification.show', ['id' => $notification->id]) }}" method="post">
     @csrf
-    <button onclick="this.form.submit()" class="dropdown-item list-group-item list-group-item-action">
+    <button class="dropdown-item list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ $notification->data["title"] }}</h5>
             <small class="text-muted">{{ $notification->created_at->fromNow() }}</small>

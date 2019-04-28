@@ -10696,3 +10696,47 @@ ul.timeline > li:before {
   z-index: 400;
 }
 
+img {
+  max-width: 100% !important;
+}
+
+.bg-blue {
+  background-color: #3490dc;
+}
+
+.bg-light-blue {
+  background-color: #d5e8f8;
+}
+
+.bg-green {
+  background-color: #38c172;
+}
+
+.bg-light-green {
+  background-color: #c7efd8;
+}
+
+.bg-indigo {
+  background-color: #6574cd;
+}
+
+.bg-light-indigo {
+  background-color: #f3f5fb;
+}
+
+.bg-orange {
+  background-color: #f6993f;
+}
+
+.bg-light-orange {
+  background-color: #fef9f3;
+}
+
+.bg-teal {
+  background-color: #4dc0b5;
+}
+
+.bg-light-teal {
+  background-color: #d8f1ef;
+}
+

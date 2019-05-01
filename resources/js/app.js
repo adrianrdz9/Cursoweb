@@ -34,7 +34,16 @@ window.moment = moment;
 
 import 'vue-event-calendar/dist/style.css'
 import vueEventCalendar from 'vue-event-calendar'
-Vue.use(vueEventCalendar, {locale: 'es'}) 
+Vue.use(vueEventCalendar, {locale: 'es'})
+
+$(document).ready(()=>{
+
+    new Promise((res, rej)=>{
+        while(!document.body){}
+        if(document.querySelector( '#description' )) ClassicEditor.create( document.querySelector( '#description' ) )
+        if(document.querySelector( '#evaluation' )) ClassicEditor.create( document.querySelector( '#evaluation' ) )
+    });
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

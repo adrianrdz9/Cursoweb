@@ -7,6 +7,7 @@
             Inicio curso web 2019
         </h1>  
 
+
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="card">
@@ -37,7 +38,7 @@
 
                 <div class="card">
                     <div class="card-header bg-orange mt-4">
-                        <h2>Ultimas publicaciones del blog</h2>
+                        <h2>Últimas publicaciones del blog</h2>
                     </div>
 
                     <div class="card-body bg-light-orange">
@@ -69,7 +70,7 @@
             <div class="col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header bg-green">
-                        <h2>Notificaciónes</h2>
+                        <h2>Notificaciones</h2>
                     </div>
 
                     <div class="card-body bg-light-green">
@@ -115,7 +116,7 @@
                 </div>
                 <div class="card mt-4">
                     <div class="card-header bg-teal">
-                        <h2>Trabajos recientes recientes</h2>
+                        <h2>Trabajos recientes</h2>
                     </div>
 
                     <div class="card-body bg-light-teal">

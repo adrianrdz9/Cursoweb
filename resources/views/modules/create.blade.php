@@ -39,18 +39,3 @@
         </form>
     </div>
 @endsection
-
-<script>
-    function wait(){
-        try{
-            ClassicEditor
-                .create( document.querySelector( '#description' ) )
-            
-            ClassicEditor
-                .create( document.querySelector( '#evaluation' ) )
-        }catch(e){
-            setTimeout(wait, 20);
-        }
-    }
-    wait();
-</script>

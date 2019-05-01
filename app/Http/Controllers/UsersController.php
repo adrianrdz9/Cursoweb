@@ -115,16 +115,16 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => ['required','max:100'],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
+            'name' => ['nullable','max:100'],
+            'email' => ['nullable', 'email', Rule::unique('users')->ignore($user)],
             'account_number' => ['nullable', 'max:9'],
-            'password' => ['required', 'min:6', 'confirmed']
+            'password' => ['nullable', 'min:6', 'confirmed']
         ]);
-
-        $user->update(array_merge(
-            $request->only(['name', 'account_number', 'email']),
-            ['password' => Hash::make($request['password'])]
-        ));
+        
+        if(isset($request['name'])) $user->name = $request['name'];
+        if(isset($request['email'])) $user->email = $request['email'];
+        if(isset($request['account_number'])) $user->account_number = $request['account_number'];
+        if(isset($request['password'])) $user->password = Hash::make($request['password']);
 
         if (isset($request['roles'])) { 
             $user->roles()->detach(); 

@@ -78861,6 +78861,14 @@ window.moment = moment;
 Vue.use(vue_event_calendar__WEBPACK_IMPORTED_MODULE_4___default.a, {
   locale: 'es'
 });
+$(document).ready(function () {
+  new Promise(function (res, rej) {
+    while (!document.body) {}
+
+    if (document.querySelector('#description')) ClassicEditor.create(document.querySelector('#description'));
+    if (document.querySelector('#evaluation')) ClassicEditor.create(document.querySelector('#evaluation'));
+  });
+});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

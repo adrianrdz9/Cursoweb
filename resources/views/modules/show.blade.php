@@ -51,6 +51,11 @@
                 </div>
             </div>
 
+            <div class="card-footer">
+                @can('edit modules')
+                    <a href="{{ route('modules.edit', ['id' => $module->id]) }}">Editar</a>
+                @endcan
+            </div>
         </div>
     </div>
 @endsection

@@ -2074,6 +2074,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    t: Array
+  },
   data: function data() {
     return {
       users: [],
@@ -2087,6 +2090,14 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/modules/create').then(function (response) {
       _this.users = response.data;
       _this.users = _this.users.sort();
+
+      _this.t.forEach(function (teacher) {
+        _this.selection = teacher.id;
+
+        _this.addUser();
+      });
+
+      _this.selection = "";
     });
   },
   methods: {

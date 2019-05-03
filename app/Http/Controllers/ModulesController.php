@@ -95,9 +95,9 @@ class ModulesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Module $module)
     {
-        //
+        return view('modules.edit', compact('module'));
     }
 
     /**

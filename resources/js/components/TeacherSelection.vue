@@ -30,6 +30,9 @@
 <script>
 export default {
 
+    props: {
+        t: Array
+    },
 
     data(){
         return {
@@ -43,6 +46,12 @@ export default {
         axios.get('/modules/create').then(response =>{
             this.users = response.data
             this.users = this.users.sort();
+            this.t.forEach(teacher => {
+                this.selection = teacher.id;
+                this.addUser();
+            });
+
+            this.selection = "";
         }); 
     },
 

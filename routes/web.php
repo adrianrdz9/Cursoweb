@@ -41,5 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('modules', 'ModulesController');
 
+    Route::get('calificaciones', 'HomeController@calificaciones')->name('delivery.calificaciones');
+
     Route::post('notifications/{id}', 'NotificationsController@show')->name('notification.show');
 });

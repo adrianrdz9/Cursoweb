@@ -87,8 +87,15 @@
 
                         @can('view deliveries')
                             @can('mark deliveries')
-                                <li class="nav-item">
-                                    <a href="{{ route('delivery.index') }}" class="nav-link">Entregas</a>
+                                <li class="nav-item dropdown">
+                                    <a href="#" id="deliveriesDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Entregas <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="deliveriesDropdown">
+                                        <a href="{{ route('delivery.index') }}" class="dropdown-item">Entregas</a>
+                                        <a href="{{ route('delivery.calificaciones') }}" class="dropdown-item">Calificaciones</a>
+                                    </div>
                                 </li>
                             @else
                                 <li class="nav-item">

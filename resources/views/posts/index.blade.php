@@ -14,6 +14,7 @@
         </span>
         
         <div class="row">
+            {{ $posts }}
             @forelse ($posts as $post)
                 <div class="col-12 my-3">
                     <div class="card">

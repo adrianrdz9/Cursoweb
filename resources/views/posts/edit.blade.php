@@ -3,24 +3,29 @@
 @section('title', '| Edit Post')
 
 @section('content')
-<div class="row">
 
-    <div class="col-md-8 col-md-offset-2">
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Editar publicación</h2>
+        </div>
 
-        <h1>Edit Post</h1>
-        <hr>
-            {{ Form::model($post, array('route' => array('posts.update', $post->id), 'method' => 'PUT')) }}
-            <div class="form-group">
-            {{ Form::label('title', 'Title') }}
-            {{ Form::text('title', null, array('class' => 'form-control')) }}<br>
+        <div class="card-body">
+            <form action="{{ route('posts.update', ['id'=>$post->id]) }}" method="post">
+                @csrf
+                @method('patch')
 
-            {{ Form::label('body', 'Post Body') }}
-            {{ Form::textarea('body', null, array('class' => 'form-control')) }}<br>
+                <label for="title">Título</label>
+                <input type="text" class="form-control" required value="{{ old('title', $post->title) }}" name="title">
 
-            {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                <label for="body" class="mt-3">Cuerpo de la publicación</label>
+                <textarea name="body" id="description" cols="30" rows="10">
+                    {{ old('body', $post->body) }}
+                </textarea>
 
-            {{ Form::close() }}
-    </div>
+                <button class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
     </div>
 </div>
 

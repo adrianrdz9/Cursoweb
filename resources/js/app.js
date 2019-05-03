@@ -40,8 +40,45 @@ $(document).ready(()=>{
 
     new Promise((res, rej)=>{
         while(!document.body){}
-        if(document.querySelector( '#description' )) ClassicEditor.create( document.querySelector( '#description' ) )
-        if(document.querySelector( '#evaluation' )) ClassicEditor.create( document.querySelector( '#evaluation' ) )
+        
+        if(document.querySelector( '#description' )) {
+            ClassicEditor
+                .create( 
+                    document.querySelector( '#description' ),
+                    {
+                        cloudServices: {
+                            uploadUrl: 'https://39214.cke-cs.com/easyimage/upload/',
+                            tokenUrl: 'https://39214.cke-cs.com/token/dev/QAvzqcOY0o81o93hew7gtiMK30DKAnE3ravMKl9kQSTyyDaClogBz570AyPF'
+                        }
+                    }
+                )
+        }
+
+        if(document.querySelector( '#evaluation' )) {
+            ClassicEditor
+                .create( 
+                    document.querySelector( '#evaluation' ),
+                    {
+                        cloudServices: {
+                            uploadUrl: 'https://39214.cke-cs.com/easyimage/upload/',
+                            tokenUrl: 'https://39214.cke-cs.com/token/dev/QAvzqcOY0o81o93hew7gtiMK30DKAnE3ravMKl9kQSTyyDaClogBz570AyPF'
+                        }
+                    }
+                )
+        }
+
+        if(document.querySelector( '#comment' )) {
+            ClassicEditor
+                .create( 
+                    document.querySelector( '#comment' ),
+                    {
+                        cloudServices: {
+                            uploadUrl: 'https://39214.cke-cs.com/easyimage/upload/',
+                            tokenUrl: 'https://39214.cke-cs.com/token/dev/QAvzqcOY0o81o93hew7gtiMK30DKAnE3ravMKl9kQSTyyDaClogBz570AyPF'
+                        }
+                    }
+                )
+        }
     });
 });
 

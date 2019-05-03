@@ -3,27 +3,27 @@
 @section('title', '| Create New Post')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Publicar</h1>
+            </div>
 
-        <h1>Create New Post</h1>
-        <hr>
+            <div class="card-body">
+                <form action="{{ route('posts.store') }}" method="POST">
+                    @csrf
+                    
+                    <label for="title">Título</label>
+                    <input type="text" name="title" id="title" class="form-control" placeholder="Título" required value="{{ old('title') }}">
 
-    {{-- Using the Laravel HTML Form Collective to create our form --}}
-        {{ Form::open(array('route' => 'posts.store')) }}
+                    <label for="body" class="mt-2">Cuerpo de publicación</label>
+                    <textarea name="body" id="description" cols="30" rows="10">
+                        {{ old('body') }}
+                    </textarea>
 
-        <div class="form-group">
-            {{ Form::label('title', 'Title') }}
-            {{ Form::text('title', null, array('class' => 'form-control')) }}
-            <br>
-
-            {{ Form::label('body', 'Post Body') }}
-            {{ Form::textarea('body', null, array('class' => 'form-control')) }}
-            <br>
-
-            {{ Form::submit('Create Post', array('class' => 'btn btn-success btn-lg btn-block')) }}
-            {{ Form::close() }}
-        </div>
+                    <input type="submit" value="Publicar" class="btn btn-success btn-lg btn-block mt-4">
+                </form>
+            </div>
         </div>
     </div>
 

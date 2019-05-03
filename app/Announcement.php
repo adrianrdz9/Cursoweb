@@ -2,9 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Announcement extends Model
 {
     protected $fillable = ['title', 'description', 'expiration'];
+
+    use SoftDeletes;
 }

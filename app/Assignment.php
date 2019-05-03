@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Delivery;
 
 use \Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Assignment extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = ['deadline', 'title', 'description', 'example', 'type', 'module_id'];
 
     protected $cast = [
@@ -52,5 +55,10 @@ class Assignment extends Model
     public function deliveries()
     {
         return $this->hasMany('App\Delivery', 'assignment_id', 'id');
+    }
+
+    public function module()
+    {
+        return $this->belongsTo('App\Module', 'module_id', 'id');
     }
 }

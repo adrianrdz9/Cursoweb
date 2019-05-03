@@ -55,6 +55,15 @@
                 @can('view assignments')
                     <a class="btn btn-info" href="{{ route('assignment.show', [$assignment])}}">Ver</a>
                 @endcan
+
+                @can('delete assignments')
+                    <form action="{{ route('assignment.destroy', ['id' => $assignment->id]) }}" method="POST">
+                        @csrf
+                        @method('delete')
+
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                @endcan
             @endrole
         @else
             {{ $footer }}

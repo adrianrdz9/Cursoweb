@@ -51,7 +51,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        if ($user->can('delete post')) {
+        if ($user->can('delete post') && $post->authot_id === $user->post) {
             return $user->id === $post->author_id;
         }
     }

@@ -77,4 +77,12 @@ class AssignmentsController extends Controller
 
         return view('assignments.show', ['assignment' => $assignment]);
     }
+
+    public function destroy(Assignment $assignment){
+        $this->authorize('destroy', $assignment);
+
+        $assignment->delete();
+
+        return redirect()->back()->with('notice', 'Trabajo eliminado');
+    }
 }

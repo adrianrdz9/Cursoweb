@@ -45,15 +45,3 @@
 
 
 @endsection
-
-<script>
-    function wait(){
-        try{
-            ClassicEditor
-                .create( document.querySelector( '#description' ) )
-        }catch(e){
-            setTimeout(wait, 20);
-        }
-    }
-    wait();
-</script>

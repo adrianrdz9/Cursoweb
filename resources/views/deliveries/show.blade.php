@@ -108,15 +108,3 @@
     </div>
 
 @endsection
-
-<script>
-    function wait(){
-        try{
-            ClassicEditor
-                .create( document.querySelector( '#comment' ) )
-        }catch(e){
-            setTimeout(wait, 20);
-        }
-    }
-    wait();
-</script>

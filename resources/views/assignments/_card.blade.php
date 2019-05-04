@@ -51,7 +51,7 @@
                         No entregado
                     @endif
                 </span>
-            @else
+            @elserole('admin')
                 @can('view assignments')
                     <a class="btn btn-info" href="{{ route('assignment.show', [$assignment])}}">Ver</a>
                 @endcan

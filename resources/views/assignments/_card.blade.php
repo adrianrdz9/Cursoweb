@@ -41,7 +41,20 @@
     </div>
     <div class="card-footer">
         @empty($footer)
-            @role('student')
+            @can('manage assignments')
+                @can('view assignments')
+                    <a class="btn btn-info" href="{{ route('assignment.show', [$assignment])}}">Ver</a>
+                @endcan
+                
+                @can('delete assignments')
+                    <form action="{{ route('assignment.destroy', ['id' => $assignment->id]) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                @endcan
+            @else
                 <a class="btn btn-info" href="{{ route('assignment.show', [$assignment])}}">Ver</a>
                 <span>
                     @if ($assignment->delivered())
@@ -51,20 +64,7 @@
                         No entregado
                     @endif
                 </span>
-            @else
-                @can('view assignments')
-                    <a class="btn btn-info" href="{{ route('assignment.show', [$assignment])}}">Ver</a>
-                @endcan
-
-                @can('delete assignments')
-                    <form action="{{ route('assignment.destroy', ['id' => $assignment->id]) }}" method="POST">
-                        @csrf
-                        @method('delete')
-
-                        <button class="btn btn-danger">Eliminar</button>
-                    </form>
-                @endcan
-            @endrole
+            @endcan
         @else
             {{ $footer }}
         @endempty

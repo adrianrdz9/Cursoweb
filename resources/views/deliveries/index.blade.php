@@ -3,7 +3,7 @@
 @section('content')
 @inject('carbon', '\Carbon\Carbon')
 
-@role('admin')
+@can('manage deliveriess')
 <div class="container">
     <ul class="nav nav-pills" id="assignmentTabs" role="tablist">
 
@@ -94,5 +94,5 @@
     </div>
 </div>
     
-@endrole
+@endcan
 @endsection

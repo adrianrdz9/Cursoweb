@@ -17,14 +17,14 @@
                         <div class="col-3">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 @foreach ($module->assignments->groupBy('type') as $type=>$assignments)
-                                    <a class="nav-link {{ $loop->first ? 'active' : ''}}" id="type{{$type}}" data-toggle="pill" href="#type{{$type}}view" role="tab" aria-controls="type{{$type}}view" aria-selected="true">{{$type}}</a>
+                                    <a class="nav-link {{ $loop->first ? 'active' : ''}}" id="type{{$type}}{{ $module->id }}" data-toggle="pill" href="#type{{$type}}{{ $module->id }}view" role="tab" aria-controls="type{{$type}}{{ $module->id }}view" aria-selected="true">{{$type}}</a>
                                 @endforeach
                             </div>
                         </div>
                         <div class="col-9">
                             <div class="tab-content" id="v-pills-tabContent">
                                 @foreach ($module->assignments->groupBy('type') as $type=>$assignments)
-                                    <div class="tab-pane fade  {{ $loop->first ? 'show active' : ''}}" id="type{{$type}}view" role="tabpanel" aria-labelledby="type{{$type}}">
+                                    <div class="tab-pane fade  {{ $loop->first ? 'show active' : ''}}" id="type{{$type}}{{ $module->id }}view" role="tabpanel" aria-labelledby="type{{$type}}{{ $module->id }}">
                                         <h3>{{ $type }} modulo {{ $module->name }}</h3>
                                         <div class="row">
                                             @isset($assignments)

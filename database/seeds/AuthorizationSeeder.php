@@ -39,13 +39,18 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($users as $role => $usr) {
-            $user_i = User::updateOrCreate([
-                ['name', $usr['name']],
-                ['account_number', $usr['account_number']],
-                ['email', $usr['email']],
-            ]);
+            if(User::where('email', 'adrian.rodriguez7109@gmail.com')->exists()){
+                User::where('email', 'adrian.rodriguez7109@gmail.com')->first()->syncRoles('admin');
+            }else {
+                $usr = User::create([
+                    'name' => 'Adrian Rodriguez',
+                    'account_number' => '317114270',
+                    'email' => 'adrian.rodriguez7109@gmail.com',
+                    'password' => Hash::make('Xaya2412')
+                ]);
 
-            $user_i->syncRoles($role);
+                $usr->syncRoles('admin');
+            }
             
         }
 

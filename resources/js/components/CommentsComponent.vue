@@ -114,7 +114,15 @@ export default {
 
         $(document).ready( ()=>{
             for( let c of document.querySelectorAll( 'textarea[name="comment"]' )){
-                ClassicEditor.create( c)
+                ClassicEditor.create(
+                    c,
+                    {
+                        cloudServices: {
+                            uploadUrl: 'https://39214.cke-cs.com/easyimage/upload/',
+                            tokenUrl: 'https://39214.cke-cs.com/token/dev/QAvzqcOY0o81o93hew7gtiMK30DKAnE3ravMKl9kQSTyyDaClogBz570AyPF'
+                        }
+                    }
+                )
             }
         });
     },

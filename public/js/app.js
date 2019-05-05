@@ -1965,7 +1965,12 @@ __webpack_require__.r(__webpack_exports__);
       try {
         for (var _iterator = document.querySelectorAll('textarea[name="comment"]')[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var c = _step.value;
-          ClassicEditor.create(c);
+          ClassicEditor.create(c, {
+            cloudServices: {
+              uploadUrl: 'https://39214.cke-cs.com/easyimage/upload/',
+              tokenUrl: 'https://39214.cke-cs.com/token/dev/QAvzqcOY0o81o93hew7gtiMK30DKAnE3ravMKl9kQSTyyDaClogBz570AyPF'
+            }
+          });
         }
       } catch (err) {
         _didIteratorError = true;

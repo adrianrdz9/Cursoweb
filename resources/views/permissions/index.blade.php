@@ -1,44 +1,64 @@
 @extends('layouts.app')
 
-@section('title', '| Permissions')
+@section('title', '| Permisos')
 
 @section('content')
 
-<div class="col-lg-10 col-lg-offset-1">
-    <h1><i class="fa fa-key"></i>Available Permissions
+<div class="container">
+    <h1>
+        <i class="fa fa-key"></i>
+        Permisos disponibles
+    </h1>
 
-    <a href="{{ route('users.index') }}" class="btn btn-default pull-right">Users</a>
-    <a href="{{ route('roles.index') }}" class="btn btn-default pull-right">Roles</a></h1>
-    <hr>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-
-            <thead>
-                <tr>
-                    <th>Permissions</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($permissions as $permission)
-                <tr>
-                    <td>{{ $permission->name }}</td> 
-                    <td>
-                    <a href="{{ URL::to('permissions/'.$permission->id.'/edit') }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
-
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['permissions.destroy', $permission->id] ]) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-auto">
+            <a href="{{ route('users.index') }}" class="btn btn-default">Usuarios</a>
+        </div>
+        <div class="col-auto">
+            <a href="{{ route('roles.index') }}" class="btn btn-default">Roles</a>
+        </div>
     </div>
 
-    <a href="{{ URL::to('permissions/create') }}" class="btn btn-success">Add Permission</a>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Permiso
+                    </th>
+                    <th>
+                        Acción
+                    </th>
+                </tr>
+            </thead>
 
+            <tbody>
+                @foreach ($permissions as $permission)
+                    <tr>
+                        <td>{{ $permission->name }}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <a href="{{ route('permissions.edit', ['id'=>$permission->id]) }}" class="btn btn-info">
+                                        Editar
+                                    </a>
+                                </div>
+                                <div class="col-auto">
+                                    <form action="{{ route('permissions.destroy', ['id' => $permission->id]) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+        
+                                        <input type="submit" value="Eliminar" class="btn btn-danger">
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody> 
+        </table>
+    </div>
+    <a href="{{ route('permissions.create') }}" class="btn btn-success">Agregar permiso</a>
 </div>
 
 @endsection

@@ -13,7 +13,7 @@ class ModulesController extends Controller
 
     function __construct(){
         $this->middleware('can:view modules')->only('index');
-        $this->middleware('can:create modules')->except('index');
+        $this->middleware('can:manage modules')->except('index');
     }
 
     /**
@@ -73,7 +73,7 @@ class ModulesController extends Controller
             ]);
         }
 
-        return redirect()->route('modules.index')->with('notice', 'Modulo creado');
+        return redirect()->route('modules.index')->with('notice', 'Módulo creado');
     }
 
     /**
@@ -107,9 +107,33 @@ class ModulesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Module $module)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:100'],
+            'description' => ['required'],
+            'hours' => ['required'],
+            'evaluation' => ['required'],
+            'teachers' => ['required']
+        ]);
+
+        $module->update([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'hours' => $request['hours'],
+            'evaluation' => $request['evaluation']
+        ]);
+
+        ModuleTeacher::where('module_id', $module->id)->delete();
+
+        foreach ($request['teachers'] as $teacher_id) {
+            ModuleTeacher::create([
+                'teacher_id' => $teacher_id,
+                'module_id' => $module->id
+            ]);
+        }
+
+        return redirect()->route('modules.show', ['id' => $module->id])->with('notice', 'Módulo actualizado');    
     }
 
     /**
@@ -118,8 +142,10 @@ class ModulesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Module $module)
     {
-        //
+        $module->delete();
+
+        return  redirect()->route('modules.index')->with('notice', 'Módulo eliminado');
     }
 }

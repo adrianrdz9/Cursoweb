@@ -55,6 +55,15 @@
                 @can('edit modules')
                     <a href="{{ route('modules.edit', ['id' => $module->id]) }}">Editar</a>
                 @endcan
+
+                @can('delete modules')
+                    <form action="{{ route('modules.destroy', ['id' => $module->id]) }}" method="post">
+                        @csrf
+                        @method('delete')
+
+                        <input type="submit" value="Eliminar módulo" class="btn btn-danger">
+                    </form>
+                @endcan
             </div>
         </div>
     </div>

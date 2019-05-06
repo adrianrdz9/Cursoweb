@@ -58740,7 +58740,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     var MS_PER_HOUR = 60 * MS_PER_MINUTE;
     var MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
 
-    // actual modulo - handles negative numbers (for dates before 1970):
+    // actual módulo - handles negative numbers (for dates before 1970):
     function mod$1(dividend, divisor) {
         return (dividend % divisor + divisor) % divisor;
     }
@@ -66058,7 +66058,7 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("h3", [_vm._v("Seleccionar profesores del modulo")]),
+      _c("h3", [_vm._v("Seleccionar profesores del módulo")]),
       _vm._v(" "),
       _c(
         "ul",

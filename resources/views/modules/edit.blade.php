@@ -7,7 +7,7 @@
             @method('patch')
             <div class="row">
                 <div class="col-6">
-                    <label for="name">Nombre de modulo</label>
+                    <label for="name">Nombre de módulo</label>
                     <input type="text" class="form-control" name="name" id="name" value="{{ old('name', $module->name) }}">
                 </div>
     

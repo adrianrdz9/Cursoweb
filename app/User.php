@@ -50,7 +50,15 @@ class User extends Authenticatable
 
     public function modules()
     {
-        return $this->hasManyThrough('App\Module', 'App\ModuleTeacher', 'teacher_id', 'id');
+        $modules = [];
+
+        $moduleTeacher = ModuleTeacher::where('teacher_id', $this->id)->with('module')->get();
+
+        foreach ($moduleTeacher as $modT) {
+            array_push($modules, $modT->module);
+        }
+
+        return $modules;
     }
 
     public function teachModule($mid){

@@ -7,22 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-use \App\Module;
-
-class AssignmentCreated extends Notification
+class AnnouncementNotification extends Notification
 {
     use Queueable;
 
-    private $assignment;
+    private $announcement;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($assignment)
+    public function __construct($announcement)
     {
-        $this->assignment = $assignment;
+        $this->announcement = $announcement;
     }
 
     /**
@@ -59,11 +57,10 @@ class AssignmentCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title' => "La ".$this->assignment->type." ".$this->assignment->title." ha sido creada.",
-            'subtitle' => "Módulo: ".Module::find($this->assignment->module_id)->name,
-            'description' => "Tienes hasta el ".\Carbon\Carbon::create($this->assignment->deadline)->isoFormat('D [de] MMMM [de] YYYY [a las] h:mm a').
-                            " da click aquí para ver más detalles",
-            'link_to' => route('assignment.show', ['id' => $this->assignment->id])
+            'title' => "¡Aviso!",
+            'subtitle' => $this->announcement->title,
+            'description' => $this->announcement->description,
+            'link_to' => '#'
         ];
     }
 }

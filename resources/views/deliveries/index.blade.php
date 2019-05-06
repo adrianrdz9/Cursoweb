@@ -4,61 +4,81 @@
 @inject('carbon', '\Carbon\Carbon')
 
 @can('manage deliveriess')
-<div class="container">
-    <ul class="nav nav-pills" id="assignmentTabs" role="tablist">
-
-        @foreach ($deliveries as $assignment)
-            <li class="nav-item">
-                <a class="nav-link {{$loop->first ? 'active' : ''}}" id="tarea{{ $assignment->id }}" data-toggle="tab" href="#tareas{{ $assignment->id }}" role="tab" aria-controls="tareas" aria-selected="true"> {{ $assignment->title }} ( {{ $assignment->deliveries->count() }} ) </a>
-            </li>
-        @endforeach
-    </ul>
-
+<div class="container-fluid">
+    <div class="container">
+        <ul class="nav nav-pills" id="assignmentTabs" role="tablist">
     
-    <div class="tab-content p-4" id="assignmentTabs">
-        @foreach ($deliveries as $assignment)
-        <div class="tab-pane fade {{$loop->first ? 'show active' : ''}}" id="tareas{{ $assignment->id }}" role="tabpanel" aria-labelledby="tarea{{ $assignment->id }}">
-                <div class="card">
-                    <div class="card-body">
-                        <h2> Fecha limite: {{ $carbon->create($assignment->deadline)->isoFormat('MMMM D YYYY, h:mm a') }} </h2>
-                        {!! $assignment->description !!}
-    
-                    </div>
-                </div>
+            @foreach ($deliveries->groupBy('module_id') as $module => $a)
+                <li class="nav-item">
+                    <a class="nav-link {{ $loop->first ? 'active' : '' }}" data-toggle="pill" id="module{{ $module }}tab" href="#module{{ $module }}" role="tab">
+                        {{ App\Module::find($module)['name'] }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+    <div class="tab-content mt-4" id="modulesAssignments">
+        @foreach ($deliveries->groupBy('module_id') as $module => $assignments)
+            <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="module{{ $module }}">
                 <div class="row">
-                    @forelse ($assignment->deliveries as $delivery)
-                        <div class="col-12 mb-4">
-                            <div class="card">
-                                <div class="card-header bg-{{ $delivery->mark == null ? 'danger' : 'success' }}">
-                                    <h3>
-                                        {{ $delivery->user->name }}
-                                        ( {{ $delivery->mark == null ? 'No calificado' : 'Calificación: '.$delivery->mark }} )
-                                    </h3>
-                                    <strong>
-                                        Utima entrega: {{ $delivery->updated_at->isoFormat('MMMM D YYYY, h:mm a') }}
-                                    </strong>
-                                </div>
-
-                                <div class="card-body" style="max-height: 200px; overflow-y: hidden;">
-                                    <a href="{{ $delivery->link }}">{{ $delivery->link }}</a>
-                                    {!! $delivery->comment !!}
-                                </div>
-
-                                <div class="card-footer">
-                                    <a href="{{ route('delivery.show', ['id' => $delivery->id]) }}" class="btn btn-outline-info">Ver</a>
-                                </div>
-                            </div>
+                    <div class="col-1"></div>
+                    <div class="col-2">
+                        <div class="nav flex-column nav-pills" id="module{{ $module }}assignments" role="tablist" aria-orientation="vertical">
+                            @foreach ($assignments as $assignment)
+                                <a class="nav-link {{$loop->first ? 'active' : ''}}" id="tarea{{ $assignment->id }}" data-toggle="tab" href="#tareas{{ $assignment->id }}" role="tab"> {{ $assignment->title }} ( {{ $assignment->deliveries->count() }} ) </a>
+                            @endforeach
                         </div>
-                    @empty
-                        <h2>Aún no hay entregas</h2>
-
-                    @endforelse
+                    </div>
+                    <div class="col-8">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            @foreach ($assignments as $assignment)
+                                <div class="tab-pane fade {{$loop->first ? 'show active' : ''}}" id="tareas{{ $assignment->id }}" role="tabpanel" aria-labelledby="tarea{{ $assignment->id }}">
+                                    <div class="card mb-4">
+                                        <div class="card-body bg-info">
+                                            <h1> {{ $assignment->title }} ({{ $assignment->module['name'] }}) </h1>
+                                            <h2> Fecha limite: {{ $carbon->create($assignment->deadline)->isoFormat('MMMM D YYYY, h:mm a') }} </h2>
+                                            {!! $assignment->description !!}
+                        
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        @forelse ($assignment->deliveries as $delivery)
+                                            <div class="col-12 mt-4">
+                                                <div class="card">
+                                                    <div class="card-header bg-{{ $delivery->mark == null ? 'danger' : 'success' }}">
+                                                        <h3>
+                                                            {{ $delivery->user->name }}
+                                                            ( {{ $delivery->mark == null ? 'No calificado' : 'Calificación: '.$delivery->mark }} )
+                                                        </h3>
+                                                        <strong>
+                                                            Utima entrega: {{ $delivery->updated_at->isoFormat('MMMM D YYYY, h:mm a') }}
+                                                        </strong>
+                                                    </div>
+                    
+                                                    <div class="card-body" style="max-height: 200px; overflow-y: hidden;">
+                                                        <a href="{{ $delivery->link }}">{{ $delivery->link }}</a>
+                                                        {!! $delivery->comment !!}
+                                                    </div>
+                    
+                                                    <div class="card-footer">
+                                                        <a href="{{ route('delivery.show', ['id' => $delivery->id]) }}" class="btn btn-outline-info">Ver</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <h2>Aún no hay entregas</h2>
+                    
+                                        @endforelse
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         @endforeach
     </div>
-
-
 </div>
 @else
 <div class="container mt-1">

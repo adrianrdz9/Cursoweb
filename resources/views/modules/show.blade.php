@@ -12,7 +12,7 @@
                 <div class="card">
 
                     <div class="card-header">
-                        <h3>Descripción del modulo</h3>
+                        <h3>Descripción del módulo</h3>
                     </div>
 
                     <div class="card-body">
@@ -31,7 +31,7 @@
 
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h3> Profesores del modulo </h3>
+                        <h3> Profesores del módulo </h3>
                     </div>
 
                     <div class="card-body">

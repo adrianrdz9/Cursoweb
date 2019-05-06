@@ -57,7 +57,7 @@ class AssignmentsController extends Controller
         if( 
             !auth()->user()->teachModule($request['module_id'])
          ){
-            return redirect()->route('assignment.create')->withInput($request->all())->with('notice', 'No puedes crear tareas para modulos en los que no eres profesor');
+            return redirect()->route('assignment.create')->withInput($request->all())->with('notice', 'No puedes crear tareas para módulos en los que no eres profesor');
          }
 
         if($validator->fails()){

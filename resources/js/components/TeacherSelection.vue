@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h3>Seleccionar profesores del modulo</h3>
+        <h3>Seleccionar profesores del módulo</h3>
 
         <ul class="list-group">
             Profesores:

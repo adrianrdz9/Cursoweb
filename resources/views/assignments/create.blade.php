@@ -24,8 +24,10 @@
                     <div class="col-6">
                         <label for="module">Módulo</label>
                         <select name="module_id" id="module" class="form-control">
-                            @foreach (auth()->user()->modules as $module)
-                                <option value="{{ $module->id }}">{{ $module->name }}</option>
+                            @foreach (auth()->user()->modules() as $module)
+                                @isset($module)
+                                    <option value="{{ $module->id }}">{{ $module->name }}</option>
+                                @endisset
                             @endforeach
                         </select>
                     </div>

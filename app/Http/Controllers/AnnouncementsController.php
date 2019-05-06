@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use \App\Announcement;
 use \Carbon\Carbon;
 
+use App\Notifications\AnnouncementNotification;
+use Notification;
+use App\User;
+
 class AnnouncementsController extends Controller
 {
 
@@ -43,11 +47,14 @@ class AnnouncementsController extends Controller
             'expiration' => ['required', 'date']
         ]);
 
-        Announcement::create([
+        $announcement = Announcement::create([
             'title' => $request['title'],
             'description' => $request['description'],
             'expiration' => $request['expiration'],
         ]);
+
+        Notification::send(User::all(), new AnnouncementNotification($announcement));
+
 
         return redirect()->route('announcements.index');
     }

@@ -25,7 +25,7 @@
                             <div class="tab-content" id="v-pills-tabContent">
                                 @foreach ($module->assignments->groupBy('type') as $type=>$assignments)
                                     <div class="tab-pane fade  {{ $loop->first ? 'show active' : ''}}" id="type{{$type}}{{ $module->id }}view" role="tabpanel" aria-labelledby="type{{$type}}{{ $module->id }}">
-                                        <h3>{{ $type }} modulo {{ $module->name }}</h3>
+                                        <h3>{{ $type }} módulo {{ $module->name }}</h3>
                                         <div class="row">
                                             @isset($assignments)
                                                 @forelse ($assignments as $assignment)

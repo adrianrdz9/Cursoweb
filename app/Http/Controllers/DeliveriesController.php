@@ -27,7 +27,7 @@ class DeliveriesController extends Controller
     public function index()
     {
         if(auth()->user()->can('view all deliveries')){
-            $deliveries = Assignment::with('deliveries.user')->get();
+            $deliveries = Assignment::with('deliveries.user')->with('module')->get();
         }else if(auth()->user()->can('view deliveries')){
             $deliveries = Delivery::where([
                 ['user_id', auth()->user()->id]

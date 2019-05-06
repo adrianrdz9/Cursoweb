@@ -21,7 +21,7 @@
                                 {!! $module->description !!}
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card mt-2">
                             <div class="card-header">
                                 <h3>Evaluación</h3>
                             </div>
@@ -30,9 +30,9 @@
                                 {!! $module->evaluation !!}
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card mt-2">
                             <div class="card-header">
-                                <h3>Profesores del modulo</h3>
+                                <h3>Profesores del módulo</h3>
                             </div>
 
                             <div class="card-body" style="max-height: 150px; overflow-y: hidden">

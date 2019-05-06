@@ -65,7 +65,7 @@
                         @can('create useful resources')
                             <li class="nav-item dropdown">
                                 <a href="#" id="usefulResourcesDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Recursos utiles <span class="caret"></span>
+                                    Recursos útiles <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="usefulResourcesDropdown">
@@ -107,7 +107,7 @@
                         @can('create modules')
                             <li class="nav-item dropdown">
                                 <a href="#" id="usersDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Modulos <span class="caret"></span>
+                                    Módulos <span class="caret"></span>
                                 </a>
     
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="usersDropdown">
@@ -117,7 +117,7 @@
                             </li>
                         @elsecan('view modules')
                                 <li class="nav-item">
-                                    <a href="{{ route('modules.index') }}" class="nav-link">Modulos</a>
+                                    <a href="{{ route('modules.index') }}" class="nav-link">Módulos</a>
                                 </li>
                         @endcan
 

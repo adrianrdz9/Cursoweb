@@ -10,6 +10,9 @@ class NotificationsController extends Controller
         foreach (auth()->user()->notifications as $notification) {
             if($notification->id == $id){
                 $notification->markAsRead();
+                if($notification->data['link_to'] == '#'){
+                    return redirect()->back();
+                }
                 return redirect($notification->data['link_to']);
             }
         }

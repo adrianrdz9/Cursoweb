@@ -87,7 +87,7 @@
                                                     <small class="text-muted">{{ $notification->created_at->fromNow() }}</small>
                                                 </div>
                                                 <small class="text-muted">{{ $notification->data['subtitle'] }}</small>
-                                                <p class="mb-1">{{ $notification->data['description'] }}</p>
+                                                <p class="mb-1">{!! $notification->data['description'] !!}</p>
                                             </button>
                                         </form>
                                     @empty

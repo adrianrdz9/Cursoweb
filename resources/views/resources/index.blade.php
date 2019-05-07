@@ -42,6 +42,7 @@
                 </div>
 
                 <div class="card-footer">
+                    {{ $resource }}
                     @isset($resource->link)
                         <a href="{{ $resource->link }}">{{ $resource->link }}</a>
                     @endisset

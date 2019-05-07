@@ -31,7 +31,20 @@
 
             <div class="card-footer">
                 <div class="row">
-                    
+                    @can('delete resources')
+                        <form action="{{ route('resources.destroy', ['id' => $resource->id]) }}" method="post">
+                            @csrf
+                            @method('delete')
+
+                            <input type="submit" value="Eliminar" class="btn btn-danger">
+                        </form>
+                    @endcan
+
+                    @can('edit resources')
+                        <a href="{{ route('resources.edit', ['id' => $resource->id]) }}" class="btn btn-info">
+                            Editar
+                        </a>
+                    @endcan
                 </div>
             </div>
         </div>

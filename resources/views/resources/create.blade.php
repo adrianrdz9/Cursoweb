@@ -38,15 +38,9 @@
                         </textarea>
                     </div>
                     <div class="col-12">
-                        <label for="example">Link al recurso (opcional)</label>
-                        <input id="example" type="text" name="example" value="{{ old('example', $resource->example ) }}" class="form-control" placeholder="Ejemplo">
+                        <label for="link">Link al recurso (opcional)</label>
+                        <input id="link" type="url" name="link" value="{{ old('link', $resource->link ) }}" class="form-control" placeholder="Link">
                     </div>
-                    
-
-
-                    <!-- TO DO Agregar archivos adjuntos -->
-
-
 
 
                 </div>

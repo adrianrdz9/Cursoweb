@@ -41,7 +41,6 @@ class ResourcesController extends Controller
             'attachment' => ['nullable', 'string'],
         ]);
 
-        // TO DO - Validar y mover el archivo adjunto (si existe) y guardar su ubicación
 
         $resource = Resource::create([
             'title' => $request['title'],
@@ -50,11 +49,41 @@ class ResourcesController extends Controller
             'link' => $request['link'],
         ]);
 
-        return redirect()->route('resources.show', ['id' => $resource->id]);
+        return redirect()->route('resources.show', ['id' => $resource->id])->with('notice', 'Recurso actualizado');
     }
 
     public function show(Resource $resource){
         return view('resources.show', ['resource' => $resource]);
+    }
+
+    public function edit(Resource $resource){
+        return view('resources.create', ['resource' => $resource]);
+    }
+
+    public function update(Request $request, Resource $resource){
+        $request->validate([
+            'title' => ['required', 'string'],
+            'type' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
+            'link' => ['nullable', 'string'],
+            'attachment' => ['nullable', 'string'],
+        ]);
+
+
+        $resource->update([
+            'title' => $request['title'],
+            'type' => $request['type'],
+            'description' => $request['description'],
+            'link' => $request['link'],
+        ]);
+
+        return redirect()->route('resources.show', ['id' => $resource->id])->with('notice', 'Recurso actualizado');
+    }
+
+    public function destroy(Resource $resource){
+        $resource->delete();
+
+        return redirect()->route('resources.index');
     }
 
 

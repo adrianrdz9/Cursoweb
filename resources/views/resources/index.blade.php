@@ -45,8 +45,9 @@
                     @isset($resource->link)
                         <a href="{{ $resource->link }}">{{ $resource->link }}</a>
                     @endisset
+		    <br />
 
-                    <a href="{{ route('resources.show', ['id'=>$resource->id]) }}" class="btn btn-info">Ver</a>
+                    <a href="{{ route('resources.show', ['id'=>$resource->id]) }}" class="btn btn-info mt-4">Ver más</a>
                 </div>
             </div>
         @endforeach

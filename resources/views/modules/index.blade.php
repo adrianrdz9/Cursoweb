@@ -35,7 +35,7 @@
                                 <h3>Profesores del módulo</h3>
                             </div>
 
-                            <div class="card-body" style="max-height: 150px; overflow-y: hidden">
+                            <div class="card-body" style="max-height: 250px; overflow-y: scroll">
                                 <ul class="list-group">
                                     @foreach ($module->teachers() as $teacher)
                                         <li class="list-group-item">

@@ -105,12 +105,12 @@
 @endsection
 
 <style>
-    @import "http://propeller.in/components/range-slider/css/nouislider.min.css";
-    @import "http://propeller.in/components/range-slider/css/range-slider.css";
+    @import "https://propeller.in/components/range-slider/css/nouislider.min.css";
+    @import "https://propeller.in/components/range-slider/css/range-slider.css";
 </style>
 
-<script src="http://propeller.in/components/range-slider/js/wNumb.js"></script>
-<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
+<script src="https://propeller.in/components/range-slider/js/wNumb.js"></script>
+<script src="https://propeller.in/components/range-slider/js/nouislider.js"></script>
 <script>
     function wait(){
         try{

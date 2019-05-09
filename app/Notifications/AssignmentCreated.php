@@ -59,7 +59,7 @@ class AssignmentCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title' => "La ".$this->assignment->type." ".$this->assignment->title." ha sido creada.",
+            'title' => $this->assignment->type.'"'.$this->assignment->title.'" ha sido creada.',
             'subtitle' => "Módulo: ".Module::find($this->assignment->module_id)->name,
             'description' => "Tienes hasta el ".\Carbon\Carbon::create($this->assignment->deadline)->isoFormat('D [de] MMMM [de] YYYY [a las] h:mm a').
                             " da click aquí para ver más detalles",

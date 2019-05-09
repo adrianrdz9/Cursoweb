@@ -12,8 +12,8 @@ class ModulesController extends Controller
 {
 
     function __construct(){
-        $this->middleware('can:view modules')->only('index');
-        $this->middleware('can:manage modules')->except('index');
+        $this->middleware('can:view modules')->only(['index', 'show']);
+        $this->middleware('can:manage modules')->except(['index', 'show']);
     }
 
     /**

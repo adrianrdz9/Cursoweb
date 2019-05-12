@@ -82,7 +82,12 @@
 
                                 <p>
                                     <b>Fecha de última actualización: </b>
+				   <span class="{{ $delivery->updated_at > $carbon::create($delivery->assignment->deadline) ? 'text-danger' : 'text-success' }}">
                                     {{ $delivery->updated_at->isoFormat('MMMM D YYYY, h:mm a') }}
+				    @if($delivery->updated_at > $carbon::create($delivery->assignment->deadline))
+					- Fuera de fecha limite
+				   @endif
+				  </span>
                                 </p>
                                 
                                 <p>

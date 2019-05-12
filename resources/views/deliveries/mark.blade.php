@@ -82,7 +82,12 @@
 
                                 <p>
                                     <b>Fecha de última actualización: </b>
+				   <span class="{{ $delivery->updated_at > $carbon::create($delivery->assignment->deadline) ? 'text-danger' : 'text-success' }}">
                                     {{ $delivery->updated_at->isoFormat('MMMM D YYYY, h:mm a') }}
+				    @if($delivery->updated_at > $carbon::create($delivery->assignment->deadline))
+					- Fuera de fecha limite
+				   @endif
+				  </span>
                                 </p>
                                 
                                 <p>
@@ -105,12 +110,12 @@
 @endsection
 
 <style>
-    @import "http://propeller.in/components/range-slider/css/nouislider.min.css";
-    @import "http://propeller.in/components/range-slider/css/range-slider.css";
+    @import "https://propeller.in/components/range-slider/css/nouislider.min.css";
+    @import "https://propeller.in/components/range-slider/css/range-slider.css";
 </style>
 
-<script src="http://propeller.in/components/range-slider/js/wNumb.js"></script>
-<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
+<script src="https://propeller.in/components/range-slider/js/wNumb.js"></script>
+<script src="https://propeller.in/components/range-slider/js/nouislider.js"></script>
 <script>
     function wait(){
         try{

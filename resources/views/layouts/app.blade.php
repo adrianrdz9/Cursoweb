@@ -135,6 +135,14 @@
                             </li>
                         @endcan
 
+			@can('view doubts')
+				<li class="nav-item" > 
+					<a href="#" class="nav-link">
+						Dudas (proximamente)
+					</a>
+				</li>
+			@endcan
+
                         {{-- @can('create exams')
                             <li class="nav-item dropdown">
                                 <a href="#" id="blogDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -76,7 +76,7 @@
                     <div class="card-body bg-light-green">
                         <div class="row">
                             <div class="col-12">
-                                <ul class="list-group">
+                                <ul class="list-group" style="max-height: 60vh; overflow-y:scroll;">
                                     <h4>Nuevas</h4>
                                     @forelse ($notifications['unread'] as $notification)
                                         <form action="{{ route('notification.show', ['id' => $notification->id]) }}" method="post">

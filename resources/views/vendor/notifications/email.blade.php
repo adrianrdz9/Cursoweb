@@ -18,7 +18,6 @@
 
 <hr>
 @if(isset($content))
-Aviso:
 {!! $content !!}
 @endif
 <hr>

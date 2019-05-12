@@ -43,7 +43,7 @@
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        @forelse ($assignment->deliveries as $delivery)
+                                        @forelse ($assignment->deliveries->sortBy('mark') as $delivery)
                                             <div class="col-12 mt-4">
                                                 <div class="card">
                                                     <div class="card-header bg-{{ $delivery->mark == null ? 'danger' : 'success' }}">

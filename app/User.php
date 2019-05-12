@@ -62,8 +62,8 @@ class User extends Authenticatable
     }
 
     public function teachModule($mid){
-        foreach($this->modules as $m){
-            if($m->id == $mid) return true;
+        foreach($this->modules() as $m){
+            if(isset($m->id) && $m->id == $mid) return true;
         }
 
         return false;

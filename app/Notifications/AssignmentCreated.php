@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Assignment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -17,6 +18,8 @@ class AssignmentCreated extends Notification
 
     /**
      * Create a new notification instance.
+     *
+     * @param Assignment $assignment
      *
      * @return void
      */
@@ -47,7 +50,11 @@ class AssignmentCreated extends Notification
         return (new MailExtended)
             ->subject('¡Trabajo nuevo!')
             ->greeting('Nuevo trabajo en el curso web: '.$this->assignment->title.'('.$this->assignment->type.')'  )
-            ->content("<strong> Módulo: </strong>".Module::find($this->assignment->module_id)->name)
+            ->content(
+                "<strong> Módulo: </strong>".
+                Module::find($this->assignment->module_id)->name.
+                $this->assignment->description
+            )
             ->line("Tienes hasta el ".\Carbon\Carbon::create($this->assignment->deadline)->isoFormat('D [de] MMMM [de] YYYY [a las] h:mm a')." para entregar")
             ->action('Ver', route('assignment.show', ['id' => $this->assignment->id]))
             ->with(['outroLines' => 'Gracias por formar parte del curso web, éxito.']);

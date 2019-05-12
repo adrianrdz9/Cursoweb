@@ -47,7 +47,7 @@ class AnnouncementNotification extends Notification
         return (new MailExtended)
                     ->subject('¡Aviso nuevo!')
                     ->greeting('Nuevo aviso en el curso web: '.$this->announcement->title)
-                    ->content($this->announcement->description)
+                    ->content("<strong>Aviso</strong>".$this->announcement->description)
                     ->action('Ver', url('/'))
                     ->with(['outroLines' => 'Gracias por formar parte del curso web, éxito.']);
     }

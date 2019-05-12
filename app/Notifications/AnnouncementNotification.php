@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Announcement;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,6 +12,7 @@ class AnnouncementNotification extends Notification
 {
     use Queueable;
 
+    /** @var Announcement */
     private $announcement;
 
     /**
@@ -31,7 +33,7 @@ class AnnouncementNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -42,10 +44,12 @@ class AnnouncementNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return (new MailExtended)
+                    ->subject('¡Aviso nuevo!')
+                    ->greeting('Nuevo aviso en el curso web: '.$this->announcement->title)
+                    ->content($this->announcement->description)
+                    ->action('Ver', url('/'))
+                    ->with(['outroLines' => 'Gracias por formar parte del curso web, éxito.']);
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
+use App\Notifications\MailExtended;
 
 use \App\Module;
 
@@ -33,7 +33,7 @@ class AssignmentCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -44,10 +44,13 @@ class AssignmentCreated extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return (new MailExtended)
+            ->subject('¡Trabajo nuevo!')
+            ->greeting('Nuevo trabajo en el curso web: '.$this->assignment->title.'('.$this->assignment->type.')'  )
+            ->content("<strong> Módulo: </strong>".Module::find($this->assignment->module_id)->name)
+            ->line("Tienes hasta el ".\Carbon\Carbon::create($this->assignment->deadline)->isoFormat('D [de] MMMM [de] YYYY [a las] h:mm a')." para entregar")
+            ->action('Ver', route('assignment.show', ['id' => $this->assignment->id]))
+            ->with(['outroLines' => 'Gracias por formar parte del curso web, éxito.']);
     }
 
     /**
@@ -59,7 +62,7 @@ class AssignmentCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title' => "La ".$this->assignment->type." ".$this->assignment->title." ha sido creada.",
+            'title' => $this->assignment->type." ".$this->assignment->title." ha sido creada.",
             'subtitle' => "Módulo: ".Module::find($this->assignment->module_id)->name,
             'description' => "Tienes hasta el ".\Carbon\Carbon::create($this->assignment->deadline)->isoFormat('D [de] MMMM [de] YYYY [a las] h:mm a').
                             " da click aquí para ver más detalles",

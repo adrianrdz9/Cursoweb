@@ -58740,7 +58740,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     var MS_PER_HOUR = 60 * MS_PER_MINUTE;
     var MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
 
-    // actual módulo - handles negative numbers (for dates before 1970):
+    // actual modulo - handles negative numbers (for dates before 1970):
     function mod$1(dividend, divisor) {
         return (dividend % divisor + divisor) % divisor;
     }
@@ -79204,8 +79204,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/ardz9/Desktop/cursoWeb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/ardz9/Desktop/cursoWeb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/ardz9/PhpstormProjects/Cursoweb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/ardz9/PhpstormProjects/Cursoweb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

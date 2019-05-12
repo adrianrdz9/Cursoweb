@@ -48,14 +48,15 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Saludos'),<br> Curso Web Prepa 6 2019
+@lang('Saludos'),<br> Curso Web Prepa 6 2019.<br>
+Este correo se envió de forma automática por favor no respondas a el.
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "Si estás teniendo problemas usando el botón \":actionText\", copia y pega la URL debajo\n".
+    "Si estás teniendo problemas usando el botón \":actionText\", copia y pega la siguiente URL\n".
     'en tu navegador: [:actionURL](:actionURL)',
     [
         'actionText' => $actionText,

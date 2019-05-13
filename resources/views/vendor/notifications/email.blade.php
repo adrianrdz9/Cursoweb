@@ -49,7 +49,7 @@
 {{ $salutation }}
 @else
 @lang('Saludos'),<br> Curso Web Prepa 6 2019.<br>
-Este correo se envió de forma automática por favor no respondas a el.
+Este correo se envió de forma automática por favor no respondas.
 @endif
 
 {{-- Subcopy --}}

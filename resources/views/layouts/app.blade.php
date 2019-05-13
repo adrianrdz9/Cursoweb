@@ -198,7 +198,7 @@
                                     <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" style="max-height: 500px; overflow-y: scroll" aria-labelledby="notificationsDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" style="max-height: 500px; overflow-y: scroll;" aria-labelledby="notificationsDropdown">
                                     <h6 class="dropdown-header">Nuevas</h6>
                                     @foreach (auth()->user()->unreadNotifications as $notification)
                                         @component('layouts.notificationTile', compact('notification'))

@@ -70,7 +70,7 @@
                                 {{ old('comment', $assignment->delivery()->comment) }}
                             </textarea>
         
-                            <button class="btn btn-outline-success">Enviar</button>
+                            <button class="btn btn-outline-success" onclick="this.disabled = true">Enviar</button>
                         </form>
                     </div>
                 @endisset
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-outline-success">Enviar</button>
+                        <button class="btn btn-outline-success" onclick="this.disabled = true">Enviar</button>
                     </div>
                 </form>
             @endif

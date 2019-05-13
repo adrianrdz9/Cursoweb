@@ -65,9 +65,12 @@ class UsersController extends Controller
         $user = User::create(
             array_merge(
                 $request->only(['name', 'email', 'account_number']),
-                ['password' => Hash::make($request['password'])]
             )
         );
+        if(isset($request['password'])){
+            $user->password = Hash::make($request['password']);
+            $user->save();
+        }
 
         if(isset($request['roles'])){
             foreach ($request['roles'] as $role) {

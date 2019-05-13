@@ -61,7 +61,12 @@
                                 <span>
                                     ¿Aún no tienes cuenta?
                                     <a href="{{ route('register') }}">Regístrate</a>
-                                </span>
+                                </span> <br>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('¿Olvidaste tu contraseña?') }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>

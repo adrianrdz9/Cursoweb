@@ -47,7 +47,7 @@ class AssignmentsController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string', 'max:190'],
-            'deadline' => ['required', 'date_format:Y-m-d H:i:s', 'after:today'],
+            'deadline' => ['required', 'date_format:Y-m-d H:i:s'],
             'description' => ['nullable', 'string'],
             'example' => ['nullable', 'string'],
             'type' => ['required', 'string'],
@@ -85,4 +85,36 @@ class AssignmentsController extends Controller
 
         return redirect()->back()->with('notice', 'Trabajo eliminado');
     }
+
+    public function edit(Assignment $assignment){
+	return view('assignments.create', compact("assignment"));
+    }
+
+    public function update(Request $request, Assignment $assignment){
+
+	$validator = Validator::make($request->all(), [
+            'title' => ['required', 'string', 'max:190'],
+            'deadline' => ['required', 'date_format:Y-m-d H:i:s'],
+            'description' => ['nullable', 'string'],
+            'example' => ['nullable', 'string'],
+            'type' => ['required', 'string'],
+            'module_id' => ['required', 'exists:modules,id']
+        ]);
+
+        if( 
+            !auth()->user()->teachModule($request['module_id'])
+         ){
+            return redirect()->route('assignment.create')->withInput($request->all())->with('notice', 'No puedes crear tareas para m  dulos en los que no eres profesor');
+         }
+
+        if($validator->fails()){
+            return redirect()->route('assignment.create')->withInput($request->all())->withErrors($validator);
+        }
+
+        $assignment->update($request->all());
+
+	return redirect()->route('assignment.show', ['id' => $assignment->id])->with('notice', 'Actualizado');
+    }
+
+
 }

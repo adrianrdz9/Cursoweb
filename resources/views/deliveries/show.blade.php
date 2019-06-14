@@ -44,7 +44,7 @@
                 @else
                     <div class="card-footer">
                         <h4>Volver a entregar</h4>
-                        <form action="{{ route('delivery.update', ['id' => $assignment->delivery()->id]) }}" method="POST">
+                        <form onsubmit="sendBtn.disabled = true; return true"  action="{{ route('delivery.update', ['id' => $assignment->delivery()->id]) }}" method="POST">
                             @method('put')
                             <p>
                                 Los archivos se deben de subir ya sea a github, gitlab, google drive, dropbox, etc. 
@@ -70,12 +70,12 @@
                                 {{ old('comment', $assignment->delivery()->comment) }}
                             </textarea>
         
-                            <button class="btn btn-outline-success" onclick="this.disabled = true">Enviar</button>
+                            <button class="btn btn-outline-success" id="sendBtn">Volver a enviar</button>
                         </form>
                     </div>
                 @endisset
             @else
-                <form action="{{ route('delivery.store') }}" method="POST">
+                <form action="{{ route('delivery.store') }}" method="POST" onsubmit="resendBtn.disabled = true; return true">
                     <input type="hidden" name="assignment_id" value="{{ $assignment->id }}">
                     <div class="card-body">
 
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-outline-success" onclick="this.disabled = true">Enviar</button>
+                        <button class="btn btn-outline-success"  id="resendBtn">Enviar</button>
                     </div>
                 </form>
             @endif

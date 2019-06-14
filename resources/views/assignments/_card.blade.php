@@ -19,14 +19,11 @@
                     style="color: {{$carbon::create($assignment->deadline) >= $carbon::now() ? 'green' : 'red' }}"
                 >
                     Entrega: 
-                    {{ $carbon::create($assignment->deadline)->isoFormat('MMMM D YYYY, h:mm a') }}
-                    <br>
-                    @if ($carbon::create($assignment->deadline) >= \Carbon\Carbon::now())
-                        Dentro de tiempo,
-                    @else
-                        Fuera de tiempo,
+                    {{ $carbon::create($assignment->deadline)->isoFormat('MMMM D YYYY, h:mm a') }},
+                    {{ $carbon::create($assignment->deadline)->fromNow() }} <br>
+		    @if ($carbon::create($assignment->deadline) < \Carbon\Carbon::now())
+                        Fuera de tiempo.
                     @endif
-                    {{ $carbon::create($assignment->deadline)->fromNow() }}
                 </span>
             </div>
         </div> 

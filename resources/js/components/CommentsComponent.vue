@@ -118,8 +118,8 @@ export default {
                     c,
                     {
                         cloudServices: {
-                            uploadUrl: 'https://39214.cke-cs.com/easyimage/upload/',
-                            tokenUrl: 'https://39214.cke-cs.com/token/dev/QAvzqcOY0o81o93hew7gtiMK30DKAnE3ravMKl9kQSTyyDaClogBz570AyPF'
+                            uploadUrl: "https://39866.cke-cs.com/easyimage/upload/",
+                            tokenUrl: "https://39866.cke-cs.com/token/dev/WqT7oYJ8EhNCRBLGcxzB0cyE2hWkbebmuwtZptH845pyeADlm307ytkc75Ij"
                         }
                     }
                 )

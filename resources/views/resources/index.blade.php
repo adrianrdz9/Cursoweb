@@ -5,7 +5,7 @@
     <div class="container">
         <h1>Recursos útiles</h1>
         @foreach ($resources as $resource)
-            <div class="card">
+            <div class="card mt-2">
                 @switch($resource->type)
                     @case('Imagen')
                         <div class="card-header bg-primary text-light">   

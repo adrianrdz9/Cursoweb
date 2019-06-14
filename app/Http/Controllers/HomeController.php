@@ -38,7 +38,7 @@ class HomeController extends Controller
             $now = date('Y-m-d');
             $announcements = Announcement::where(
                 'expiration', '>=', $now
-            )->get();
+            )->orderByDesc('created_at')->get();
     
             $assignments = Assignment::orderByDesc('created_at')->limit(4)->get();
     

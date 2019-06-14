@@ -24,6 +24,10 @@
 
                     @endif
                 @endif
+
+		@can('edit assignment')
+			<a href="{{ route('assignment.edit', ['id' => $assignment->id]) }}" class="btn btn-info"> Editar </a>
+		@endcan
             @endslot
         @endcomponent
         <div class="card mt-4">

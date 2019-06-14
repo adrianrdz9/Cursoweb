@@ -21,7 +21,7 @@ class ResourcesController extends Controller
 
     public function index()
     {
-        $resources = Resource::all();
+        $resources = Resource::orderBy('updated_at', 'desc')->get();
 
         return view('resources.index', ['resources' => $resources]);
     }
